@@ -4,6 +4,7 @@ const http = require("http");
 const cors = require("cors");
 
 const app = express();
+const port = 5000;
 app.use(express.json());
 app.use(cors());
 const server = http.createServer(app);
@@ -12,8 +13,11 @@ const io = socket(server, {
     origin: "http://localhost:5173",
   },
 });
-
-const port = 5000;
+io.on("connection", (socket) => {
+  socket.on("joinChat", () => {});
+  socket.on("sendMessage", () => {});
+  socket.on("disconnect", () => {});
+});
 
 app.use("/", (req, res) => {
   res.send("hello developer");
