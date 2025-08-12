@@ -14,8 +14,24 @@ const io = socket(server, {
   },
 });
 io.on("connection", (socket) => {
-  socket.on("joinChat", () => {});
-  socket.on("sendMessage", () => {});
+  console.log("connection set", socket.id);
+  socket.on("joinChat", ({ username, userId, receiverId }) => {
+    const room = [userId, receiverId].sort().join("*");
+    socket.join(room);
+  });
+  socket.on(
+    "sendMessage",
+    ({ username, message, userId, receiverId, Date }) => {
+      const room = [userId, receiverId].sort().join("*");
+      io.to(room).emit("servermsg", {
+        username,
+        message,
+        userId,
+        receiverId,
+        Date,
+      });
+    }
+  );
   socket.on("disconnect", () => {});
 });
 
