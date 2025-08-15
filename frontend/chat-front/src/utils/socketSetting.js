@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
 
 export const socketSetting = () => {
-  return io("http://localhost:5000/");
+  return io("https://simple-chatapp-nvr1.onrender.com/");
 };
