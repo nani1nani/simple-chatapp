@@ -12,7 +12,7 @@ app.use(cors());
 const server = http.createServer(app);
 const io = socket(server, {
   cors: {
-    origin: "https://chaichatbro.netlify.app/",
+    origin: "https://chaichatbro.netlify.app",
   },
 });
 io.on("connection", (socket) => {
